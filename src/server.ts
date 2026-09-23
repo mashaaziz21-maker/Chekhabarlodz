@@ -34,7 +34,7 @@ function markup(id:string, d:Draft) {
   return {inline_keyboard:rows};
 }
 async function generate(source:string) {
-  const r = await ai.responses.create({model:"gpt-5.6-mini",input:buildPrompt(source)});
+  const r = await ai.responses.create({model:"gpt-5-mini",input:buildPrompt(source)});
   return JSON.parse(r.output_text.trim());
 }
 
