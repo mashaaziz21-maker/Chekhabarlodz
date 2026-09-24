@@ -97,4 +97,22 @@ app.post("/telegram/webhook",async(req,res)=>{
     res.sendStatus(200);
   }
 });
+async function setupWebhook() {
+  const url = `https://chekhabarlodz.onrender.com/telegram/webhook`;
+
+  await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/setWebhook`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      url,
+      secret_token: process.env.TELEGRAM_WEBHOOK_SECRET
+    })
+  });
+
+  console.log("Telegram webhook configured:", url);
+}
+
+setupWebhook().catch(console.error);
 app.listen(Number(process.env.PORT||3000),()=>console.log("Bot listening"));
